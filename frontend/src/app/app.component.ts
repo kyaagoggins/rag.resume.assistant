@@ -4,6 +4,9 @@ import { RouterModule } from '@angular/router';
 import { AssistantComponent } from './components/assistant/assistant.component';
 import { TitleComponent } from './components/title/title.component';
 import { Title } from '@angular/platform-browser';
+import { JobTextbox } from './components/job-textbox/job-textbox.component';
+import { SubmitButton } from './components/submit-button/submit-button.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 @Component({
   selector: 'app-root',     
@@ -12,6 +15,9 @@ import { Title } from '@angular/platform-browser';
     //NavbarComponent,
     AssistantComponent,
     TitleComponent,
+    JobTextbox,
+    SubmitButton,
+    ChatComponent,
     RouterModule
   ],           
   templateUrl: './app.component.html',       

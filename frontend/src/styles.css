@@ -1,7 +1,23 @@
 
+* {
+  font-family: 'Fredoka', sans-serif !important;
+}
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+    margin: 0; 
+    font-family: 'Fredoka', sans-serif !important; 
+    font-weight: 100;
+    min-height: 100vh;
+    background: radial-gradient(circle at center, #00bfff,#1dbfc4, #1f87ab, #154e75);
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 
 :root {
   --bs-primary: #1f87ab; /* dark cyan/blue */
@@ -18,3 +34,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: #00bfff !important;
 }
 
+.font-normal {
+  font-weight: 100;
+}
+
+.font-semi {
+  font-weight: 125;
+  letter-spacing: 2px;
+}
