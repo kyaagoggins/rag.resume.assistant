@@ -1,3 +1,10 @@
 <!-- I want this submit button to be a big arrow
 when clicked on, a spinning animation should appear on the button and load 
 when results are done, the button should turn into a check mark -->
+<div class="container-fluid" id="button-container">
+    <button type="button" class="btn btn-lg" id="button" (click)="onClickSubmit()">
+        <i class="bi bi-arrow-right-circle fs-1" id="submit"></i>
+        <i class="bi bi-arrow-repeat spin fs-1"  id="spin-submit" hidden></i>
+        <i class="bi bi-check-circle fs-1" id="submit-done" hidden></i>
+    </button>
+</div>

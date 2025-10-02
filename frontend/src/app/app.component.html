@@ -3,6 +3,9 @@
  <app-title></app-title>
 <assistant-chat [message]="'Hello, how can I assist you today?'" [show]="true"></assistant-chat>
 <app-assistant></app-assistant>
-<job-textbox></job-textbox>
-<submit-button></submit-button>
+    <div class="container-fluid" id="input-section">
+        <job-textbox></job-textbox>
+        <submit-button></submit-button>
+        <app-result></app-result>
+    </div>
 <router-outlet />

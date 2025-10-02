@@ -1,0 +1,14 @@
+#job-textbox-container {
+    height: 400px;
+    width: 300px;
+    padding: 2%;
+} 
+
+#job-description {
+    background-color: #dae1ed;
+}
+
+#job-description-label {
+    color: white;
+}
+

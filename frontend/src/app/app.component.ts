@@ -7,6 +7,7 @@ import { Title } from '@angular/platform-browser';
 import { JobTextbox } from './components/job-textbox/job-textbox.component';
 import { SubmitButton } from './components/submit-button/submit-button.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { ResultComponent } from './components/result/result.component';
 
 @Component({
   selector: 'app-root',     
@@ -18,6 +19,7 @@ import { ChatComponent } from './components/chat/chat.component';
     JobTextbox,
     SubmitButton,
     ChatComponent,
+    ResultComponent,
     RouterModule
   ],           
   templateUrl: './app.component.html',       
