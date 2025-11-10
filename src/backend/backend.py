@@ -5,8 +5,8 @@ from openai import OpenAI
 
 import streamlit as st
 
-from graph_parse import openai_llm_parser
-from test_resume import chunk_resume_text, extract_graph_from_resume, relationships_to_cypher
+from backend.graph_parse import openai_llm_parser
+from backend.test_resume import chunk_resume_text, extract_graph_from_resume, relationships_to_cypher
 
 # Load environment variables
 load_dotenv()

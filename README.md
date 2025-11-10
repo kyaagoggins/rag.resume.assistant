@@ -28,4 +28,7 @@ cmd:
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+
+navigate to src/
+sudo service docker start - starts docker instance if not already running 
 docker compose up -d
