@@ -1,4 +1,4 @@
-<div class="assistant-bubble" [class.show]="show">
+<div [class]="bubbleClass" [class.show]="showBubble">
   <div class="bubble-text">
     <p>{{ message }}</p>
   </div>
@@ -7,7 +7,6 @@
     <i class="bi bi-arrow-clockwise"></i>
   </button>
 </div>
-
 
 <!-- Quick action buttons -->
 <div class="chat-options">
@@ -18,7 +17,6 @@
 <!-- Upload input -->
 <div class="chat-input-container" [style.display]="showUpload ? 'flex' : 'none'">
   <input type="file" (change)="onFileUpload($event)" />
-  <button>Upload</button>
 </div>
 
 <!-- Text input -->

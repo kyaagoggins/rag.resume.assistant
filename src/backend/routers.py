@@ -12,7 +12,8 @@ app = FastAPI()
 # Enable CORS for Angular frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:4200"],
+    allow_origins=["*"],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"]
 )
@@ -21,23 +22,41 @@ app.add_middleware(
 def test_api():
     return {"message": "Backend is up!"}
 
-@app.post("/upload-resume/")
-async def upload_resume(file: UploadFile = File(...)):
-    os.makedirs("documents", exist_ok=True)
-    file_path = os.path.join("documents", file.filename)
-    with open(file_path, "wb") as f:
-        f.write(await file.read())
-    
-    docs = load_documents("documents")
-    results = []
+DOCS_FOLDER = "documents"
+os.makedirs(DOCS_FOLDER, exist_ok=True)
 
-    for doc in docs:
-        file_id = "1"  # generate unique ID in production
-        rels = extract_graph_from_resume(doc["text"], file_id)
-        store_relationships_to_neo4j(rels)
-        chunks = chunk_resume_text(doc["text"], file_id)
-        create_qdrant_collection()
-        send_chunks_to_qdrant(chunks, file_id)
-        results.append({"filename": doc["filename"], "relationships": rels, "chunks": chunks})
+@app.post("/upload")
+async def upload_file(file: UploadFile = File(...)):
+    print("Received file:", file.filename)
+    content = await file.read()
+    print("File size (bytes):", len(content))
+
+    file_path = os.path.join(DOCS_FOLDER, file.filename)
+    with open(file_path, "wb") as f:
+        f.write(content)
+
+    docs = load_documents(DOCS_FOLDER)
+    print("Documents loaded:", len(docs))
+
+    return {"filename": file.filename, "documents_loaded": len(docs)}
+
+# @app.post("/upload-resume/")
+# async def upload_resume(file: UploadFile = File(...)):
+#     os.makedirs("documents", exist_ok=True)
+#     file_path = os.path.join("documents", file.filename)
+#     with open(file_path, "wb") as f:
+#         f.write(await file.read())
     
-    return {"results": results}
+#     docs = load_documents("documents")
+#     results = []
+
+#     for doc in docs:
+#         file_id = "1"  # generate unique ID in production
+#         rels = extract_graph_from_resume(doc["text"], file_id)
+#         store_relationships_to_neo4j(rels)
+#         chunks = chunk_resume_text(doc["text"], file_id)
+#         create_qdrant_collection()
+#         send_chunks_to_qdrant(chunks, file_id)
+#         results.append({"filename": doc["filename"], "relationships": rels, "chunks": chunks})
+    
+#     return {"results": results}
