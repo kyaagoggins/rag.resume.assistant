@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { AssistantComponent } from './components/assistant/assistant.component';
 import { TitleComponent } from './components/title/title.component';
@@ -15,7 +14,6 @@ import { CommonModule } from '@angular/common';
   selector: 'app-root',     
   standalone: true,
   imports: [
-    // NavbarComponent,
     // CommonModule,
     AssistantComponent,
     TitleComponent,

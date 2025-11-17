@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-// import { Api } from '../../services/api';
+import { ApiService } from '../../services/api';
 
 @Component({
     selector: 'submit-button',
@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
 
 export class SubmitButton {
 
-    //constructor(private api: Api) {}
+    constructor(private api: ApiService) {}
 
     onClickSubmit() {
         var submitButton = document.getElementById('submit');
@@ -23,23 +23,34 @@ export class SubmitButton {
 
         spinButton && spinButton.hasAttribute('hidden') ? spinButton.removeAttribute('hidden') : null;
 
-    //     // --------------------
-    // // TEST BACKEND CONNECTION
-    // // --------------------
-    // this.api.testBackend().subscribe(
-    //   res => {
-    //     console.log('Backend response:', res);
-    //     // optional: display result somewhere in the UI
-    //   },
-    //   err => {
-    //     console.error('Error connecting to backend:', err);
-    //   }
-    // );
+        this.api.testBackend().subscribe({
+            next: (res) => {
+                console.log('API SUCCESS:', res);
+                this.finishAnimation();
+            },
+            error: (err) => {
+                console.error('API ERROR:', err);
+                this.finishAnimation(true); 
+            }
+        });
+    }
+
+    private finishAnimation(isError: boolean = false) {
+        var spinButton = document.getElementById('spin-submit');
+        var doneButton = document.getElementById('submit-done');
+        var submitButton = document.getElementById('submit');
 
         setTimeout(() => {
             spinButton ? spinButton.setAttribute('hidden', 'true') : null;
-            var doneButton = document.getElementById('submit-done');
-            doneButton && doneButton.hasAttribute('hidden') ? doneButton.removeAttribute('hidden') : null;
+
+            if (!isError) {
+                 doneButton && doneButton.hasAttribute('hidden') ? doneButton.removeAttribute('hidden') : null;
+            } else {
+                submitButton?.removeAttribute('hidden');    
+                doneButton?.setAttribute('hidden', 'true');
+                console.log('Backend API call failed.');
+            }
         }, 5000);
     }
+
 }

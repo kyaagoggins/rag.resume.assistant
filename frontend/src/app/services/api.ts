@@ -1,32 +1,38 @@
-// import { Injectable } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-// import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class Api {
-//   private apiUrl = 'http://localhost:8000'; 
+@Injectable({
+  providedIn: 'root'
+})
+export class ApiService {
+  private apiUrl = 'http://localhost:8000'; 
 
-//   constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-//   // Test GET endpoint
-//   testBackend(): Observable<any> {
-//     return this.http.get(`${this.apiUrl}/`);
-//   }
+  // Test GET route
+  testBackend(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/`).pipe(
+      catchError(this.handleError)
+    );
+  }
 
-//   // // Upload a file
-//   // uploadFile(file: File): Observable<any> {
-//   //   const formData = new FormData();
-//   //   formData.append('file', file);
-//   //   return this.http.post(`${this.apiUrl}/upload`, formData);
-//   // }
+  // Upload resume
+  uploadResume(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
 
-//   // // Send text to process endpoint
-//   // processText(text: string): Observable<any> {
-//   //   return this.http.post(`${this.apiUrl}/process`, { text });
-//   // }
-// }
+    return this.http.post(`${this.apiUrl}/upload-resume/`, formData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    console.error('API Error:', error);
+    return throwError(() => new Error('Something went wrong with the API'));
+  }
+}
 
 //need to properly connect the  backend api to the frontend
 //angular 16 with standalone components - no app module

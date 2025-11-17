@@ -3,4 +3,26 @@
     <p>{{ message }}</p>
   </div>
   <div class="bubble-tail"></div>
+  <button class="reset-btn" (click)="resetChat()" title="Reset">
+    <i class="bi bi-arrow-clockwise"></i>
+  </button>
+</div>
+
+
+<!-- Quick action buttons -->
+<div class="chat-options">
+  <button (click)="onUploadClick()" [disabled]="buttonsDisabled">Upload Experience Info</button>
+  <button (click)="onTypeClick()" [disabled]="buttonsDisabled">Type Additional Context</button>
+</div>
+
+<!-- Upload input -->
+<div class="chat-input-container" [style.display]="showUpload ? 'flex' : 'none'">
+  <input type="file" (change)="onFileUpload($event)" />
+  <button>Upload</button>
+</div>
+
+<!-- Text input -->
+<div class="chat-input-container" [style.display]="showInput ? 'flex' : 'none'">
+  <input type="text" [(ngModel)]="userText" placeholder="Type your info here..." />
+  <button (click)="onSendClick()">Send</button>
 </div>

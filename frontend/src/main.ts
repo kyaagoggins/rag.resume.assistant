@@ -4,9 +4,11 @@ import { AppComponent } from './app/app.component';
 import { importProvidersFrom } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { appConfig } from './app/app.config';
+import { provideHttpClient } from '@angular/common/http';
 
 bootstrapApplication(AppComponent, {
   providers: [
+     provideHttpClient() ,
     importProvidersFrom(RouterModule)  
   ]
 })
